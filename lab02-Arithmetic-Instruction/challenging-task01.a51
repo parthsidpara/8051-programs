@@ -1,0 +1,29 @@
+;Write an 8051 ASM program to solve the following mathematical equation:
+;W=(Y+3Z-6X)/6D,  Where D=03H, X=02H, Y=25H and Z=12H
+
+ORG 0000H
+MOV R4, #03H
+MOV R3, #08H
+MOV R2, #25H
+MOV R1, #12H
+MOV A, R1
+MOV B, #04H
+MUL AB
+MOV R5, A
+MOV A, R3
+MOV B, #02H
+MUL AB
+MOV R6, A
+MOV A, R4
+MOV B, #03H
+MUL AB
+MOV R7, A
+MOV A, R5
+ADD A, R6
+MOV R0, A
+MOV A, R0
+SUBB A, R2
+MOV B, R7
+DIV AB
+MOV 22H, A
+END
