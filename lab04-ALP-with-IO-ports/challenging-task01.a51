@@ -1,0 +1,22 @@
+;Write an 8051-assembly language program to create a Rectangular wave 
+;of 75% duty cycle on bit 3 of port 1. Assume the crystal Frequency as 33 MHz
+
+ORG 0000H
+SETUP	MOV TMOD, #01H
+MOV P1, #08H
+HIGH_PERIOD	MOV TH0, #0F7H
+MOV TL0, #0CFH
+SETB TR0
+WAIT_HIGH JNB TF0, WAIT_HIGH
+CLR TR0
+CLR TF0
+MOV P1, #00H
+LOW_PERIOD	MOV TH0, #0FDH
+MOV TL0, #03FH
+SETB TR0
+WAIT_LOW JNB TF0, WAIT_LOW
+CLR TR0
+CLR TF0
+MOV P1, #08H
+SJMP HIGH_PERIOD
+END
